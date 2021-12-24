@@ -1,26 +1,10 @@
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
+import { useTransactions } from "../../hooks/useTransactions";
+
 import { Container } from "./styles";
-
-interface Transaction{
-    id: number;
-    title: string;
-    amount: number;
-    type: string;
-    category: string;
-    createdAt: string;
-}
-
 
 
 export function TransactionsTable(){
-    //armazena um array de transactions
-    const [transactions, setTransaction] = useState<Transaction[]>([]);
-    //consumindo api do miragejs
-    useEffect(() => {
-        api.get('transactions')
-            .then(response => setTransaction(response.data))
-    }, []);
+    const {transactions} = useTransactions();
 
     return (
         <Container>
